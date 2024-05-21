@@ -20,6 +20,16 @@ class User(Base):
     email = Column(String(150), nullable=False, unique=True)
     image = Column(String(500), nullable=True)
 
+class Planet(Base):
+    __tablename__ = 'planet'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100), nullable=False)
+    is_favorite = Column(Boolean, default=False)
+    climate = Column(String(50))
+    population = Column(Integer)
+    terrain = Column(String(50))
+    image = Column(String(250))
+
 class Character(Base):
     __tablename__ = 'character'
     id = Column(Integer, primary_key=True)
@@ -32,17 +42,9 @@ class Character(Base):
     eye_color = Column(String(10))
     gender = Column(String(10))
     hair_color = Column(String(20))
-    homeworld = Column(String(100))
+    homeworld = Column(String, ForeignKey('planet.name'))
 
-class Planet(Base):
-    __tablename__ = 'planet'
-    id = Column(Integer, primary_key=True)
-    name = Column(String(100), nullable=False)
-    is_favorite = Column(Boolean, default=False)
-    climate = Column(String(50))
-    population = Column(Integer)
-    terrain = Column(String(50))
-    image = Column(String(250))
+    planet = relationship(Planet)
 
 class Favorites(Base):
     __tablename__ = 'favorites'
