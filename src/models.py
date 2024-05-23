@@ -42,7 +42,7 @@ class Character(Base):
     eye_color = Column(String(10))
     gender = Column(String(10))
     hair_color = Column(String(20))
-    homeworld = Column(String, ForeignKey('planet.name'))
+    homeworld = Column(String, ForeignKey('planet.id'))
 
     planet = relationship(Planet)
 
